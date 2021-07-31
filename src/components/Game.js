@@ -20,6 +20,79 @@ const Play = () => {
   }, []);
 
 
+  const startplay = async () => {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    let scoren = 0;
+    let playeradv = [];
+    let scoreadvplay = [];
+    let scoretotal = [];
+
+    while (scoren < 1000) {
+      let randomPlayer = Math.floor(Math.random() * cantplayers) + 1;
+      let randomAdvance = Math.floor(Math.random() * 6) + 1;
+
+      console.log(randomPlayer, "---JUGADOR---");
+      console.log(randomAdvance, "---ADVANCE---");
+      console.log(scoretotal);
+
+      //Validar si el jugador ya tiene un puntaje
+      //Se Crean dos arreglos, 1 para guardar la información de cada movimiento
+      //El otro para mostrar el total
+      if (playeradv.indexOf(randomPlayer) != -1) {
+        scoretotal = scoretotal.map((val) => {
+          if (val.id == randomPlayer) {
+            scoren = val.score + randomAdvance * 100;
+            scoreadvplay = [
+              ...scoreadvplay,
+              { id: val.id, advance: randomAdvance * 100, scoretotal: scoren },
+            ];
+            return { id: val.id, score: scoren };
+          } else {
+            return val;
+          }
+        });
+      } else {
+        scoren = randomAdvance * 100;
+        scoreadvplay = [
+          ...scoreadvplay,
+          { id: randomPlayer, advance: scoren, scoretotal: scoren },
+        ];
+        scoretotal = [...scoretotal, { id: randomPlayer, score: scoren }];
+        playeradv.push(randomPlayer);
+      }
+      setScore(scoren);
+    }
+
+    scoretotal.sort(function (a, b) {
+      if (a.score < b.score) {
+        return 1;
+      }
+      if (a.score > b.score) {
+        return -1;
+      }
+      return 0;
+    });
+
+    setScoreplayertotal(scoretotal);
+    setScoreplayer(scoreadvplay);
+
+    //Enviar ganador
+    const winner = scoretotal[0];
+    const upstaewinner = await Axios.post("http://localhost:4001/", winner, {
+      headers: headers,
+    });
+ 
+
+    //Actualizar info
+    const infogamer = await Axios.get("http://localhost:4001/");
+    setPlayers(infogamer.data);
+
+  };
+
+
 
   return (
     <>
