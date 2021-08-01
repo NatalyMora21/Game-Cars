@@ -8,12 +8,4 @@ router.get('/',allplayers);
 router.post('/',updateGamerWon);
 
 
-//Crear puntaje de cada jugador
-//router.post('/',createadvances);
-
-//crear una partida
-//router.post('/newpartida',newpartida);
-
-
-
 module.exports = router;
