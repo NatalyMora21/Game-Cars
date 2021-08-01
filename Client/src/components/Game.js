@@ -30,13 +30,10 @@ const Play = () => {
     let scoreadvplay = [];
     let scoretotal = [];
 
-    while (scoren < 1000) {
+    while (scoren < 2000) {
       let randomPlayer = Math.floor(Math.random() * cantplayers) + 1;
       let randomAdvance = Math.floor(Math.random() * 6) + 1;
 
-      console.log(randomPlayer, "---JUGADOR---");
-      console.log(randomAdvance, "---ADVANCE---");
-      console.log(scoretotal);
 
       //Validar si el jugador ya tiene un puntaje
       //Se Crean dos arreglos, 1 para guardar la información de cada movimiento
@@ -97,7 +94,7 @@ const Play = () => {
   return (
     <>
       <h1>Gamers</h1>
-
+      <h2>Pista: 2km</h2>
       <table class="table">
         <thead>
           <tr>
@@ -112,22 +109,26 @@ const Play = () => {
           ))}
         </tbody>
       </table>
+      {scoreplayer.length > 0 ?
+            <button
+            class="w-100 btn btn-warning btn-lg"
+            onClick={startplay}
+            type="submit"
+          >
+            Start game
+          </button>
+          : <p>There is no information in the database</p>
+      }
 
-      <button
-        class="w-100 btn btn-warning btn-lg"
-        onClick={startplay}
-        type="submit"
-      >
-        Start game
-      </button>
 
-      {scoreplayer.length > 0 ? <h2>Random Advances</h2> : <></>}
-
-      <table class="table">
+      {scoreplayer.length > 0 ? 
+        <>
+        <h2>Random Advances</h2> 
+        <table class="table">
         <thead>
           <tr>
             <th scope="col"># Car</th>
-            <th scope="col">Adavance</th>
+            <th scope="col">Advance</th>
             <th scope="col">Parcial Total</th>
           </tr>
         </thead>
@@ -145,8 +146,14 @@ const Play = () => {
           })}
         </tbody>
       </table>
+      </>
+      
+      
+      : <></>}
 
-      {score >= 1 ? (
+
+
+      {score >= 2000 ? (
           
         <>
           <h2>Podium</h2>
@@ -157,7 +164,8 @@ const Play = () => {
                         <div class="card-body">
                             <h3 class="card-title">Second place</h3>
                             <h4>No Car: {scoreplayertotal[1].id} </h4>
-                            <h5>score: {scoreplayertotal[1].score}</h5>
+                            <h5>score: {scoreplayertotal[1].score} m</h5>
+                            <h5>score: {scoreplayertotal[1].score/1000} km</h5>
                         </div>
                     </div>
                 </div>
@@ -168,7 +176,8 @@ const Play = () => {
                 <div class="card-body">
                     <h3 class="card-title">First place</h3>
                     <h4>No Car: {scoreplayertotal[0].id} </h4>
-                    <h5>score: {scoreplayertotal[0].score}</h5>
+                    <h5>score: {scoreplayertotal[0].score} m </h5>
+                    <h5>score: {scoreplayertotal[0].score/1000} km </h5>
                 </div>
               </div>
             </div>
@@ -178,7 +187,8 @@ const Play = () => {
                     <div class="card-body">
                     <h3 class="card-title">Third place</h3>
                             <h4>No Car: {scoreplayertotal[2].id} </h4>
-                            <h5>score: {scoreplayertotal[2].score}</h5>
+                            <h5>score: {scoreplayertotal[2].score} m</h5>
+                            <h5>score: {scoreplayertotal[0].score/1000} km </h5>
                     </div>
                 </div>
                 </div>
