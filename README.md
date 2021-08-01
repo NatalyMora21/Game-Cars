@@ -10,7 +10,7 @@ La pista tiene 1km
 
 ## Técnologías y herramientas
 
-* Js: Se realiza el Backend y el Front End con node.js y react
+* Js: Se realiza el Backend y el Front End con node.js , react y base de datos en Mysql
 
 
 * Modulos que se deben instalar:
