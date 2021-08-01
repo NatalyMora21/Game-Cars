@@ -28,6 +28,7 @@ cors
 ## Ejecución 
 
 Backend : npm run dev
+
 Front: npm start
 
 ## Autor ✒️
